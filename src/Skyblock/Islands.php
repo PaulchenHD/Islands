@@ -11,7 +11,7 @@ class Islands
 {
     public function deleteIsland(Player $player){
         if($this->isIsland($player)) {
-            rmdir($potentialIsland);
+            rmdir($this->getServer()->getDataPath(). "worlds/sb[". $player->getName()."]");
         }
     }
     public function isIsland(Player $player){
