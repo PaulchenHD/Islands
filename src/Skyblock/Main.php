@@ -52,7 +52,7 @@ Class Main extends PluginBase implements Listener{
                     if(isset($args[0])){
                         if($args[0] == "create"){
                             $this->setWorld($this->getDataFolder() . "world", $this->getServer()->getDataPath() . "worlds/sb[". $sender->getName()."]");
-                            $sender->sendMessage(Color::GREEN."GREAT!");
+                            $sender->sendMessage(Color::GREEN."");
                         }
                         elseif($args[0] == "delete"){
 
@@ -68,14 +68,14 @@ Class Main extends PluginBase implements Listener{
                                 $sender->teleport(new Position($loc->x, $loc->y, $loc->z, $world));
                             }
                             else{
-                                $sender->sendMessage(Color::RED."Create an Island first!");
+                                $sender->sendMessage(Color::RED."Please make sure to create an island first.");
                             }
                         }
                         elseif($args[0] == "setspawn" || $args[0] == "settp" || $args[0] == "sethome"){
                             if($sender->getLevel()->getFolderName() == "sb[". $sender->getName(). "]"){
                                 $world = $this->getServer()->getLevelByName("sb[". $sender->getName(). "]");
                                 $world->setSpawnLocation(new Vector3($sender->x, $sender->y, $sender->z));
-                                $sender->sendMessage(Color::GREEN."GREAT!");
+                                $sender->sendMessage(Color::GREEN."");
                             }
                         }
                         elseif($args[0] == "visit"){
