@@ -15,7 +15,8 @@ class Islands
         }
     }
     public function isIsland(Player $player){
-        if(is_dir($this->getServer()->getDataPath(). "worlds/sb[". $player->getName()."]")) {
+        $potentialIsland = $this->getServer()->getDataPath(). "worlds/sb[". $player->getName()."]";
+        if(is_dir($potentialIsland)) {
             rmdir($potentialIsland);
             return true;
         } else {
