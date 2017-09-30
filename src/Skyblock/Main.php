@@ -41,7 +41,7 @@ Class Main extends PluginBase implements Listener{
                         }
                         elseif($args[0] == "delete"){
                             if(is_dir($this->getServer()->getDataPath(). "worlds/sb[". $sender->getName()."]")){
-                                
+                                $this->getIslands()->deleteIsland($sender);
                             }
                         }
                         elseif($args[0] == "spawn" || $args[0] == "tp" || $args[0] == "home"){ // TODO: move the world to the worlds, if the player want to leave, remove the world from worlds and set it into the data-folder
