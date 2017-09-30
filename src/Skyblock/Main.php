@@ -44,7 +44,7 @@ Class Main extends PluginBase {
                             if(is_dir($this->getServer()->getDataPath(). "worlds/sb[". $sender->getName()."]")){
                                 $this->getServer()->loadLevel("sb[". $sender->getName()."]");
 
-                                $this->getIslands()->tpPlayerToHome($sender);
+                                $this->getIslands()->tpPlayerToHome($sender, $this->getServer()->getLevelByName("sb[". $sender->getName(). "]"));
                             }
                             else{
                                 $sender->sendMessage(Color::RED."Please make sure to create an island first.");
