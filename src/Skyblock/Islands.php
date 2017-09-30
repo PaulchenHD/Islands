@@ -9,6 +9,15 @@ use Skyblock\Main;
 
 class Islands
 {
+    public function deleteIsland(Player $player){
+        $potentialIsland = "sb[".$player->getName()."]";
+        if(is_dir("sb[".$player->getName()."]")) {
+            rmdir($potentialIsland);
+            return true;
+        } else {
+            return false;
+        }
+    }
     public function setWorld($src, $dst)
     {
         $dir = opendir($src);
