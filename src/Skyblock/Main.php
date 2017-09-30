@@ -5,8 +5,6 @@ namespace Skyblock;
 use pocketmine\block\Block;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
-use pocketmine\event\Listener;
-use pocketmine\event\player\PlayerChatEvent;
 use pocketmine\level\Position;
 use pocketmine\math\Vector3;
 use pocketmine\Player;
@@ -17,7 +15,7 @@ use Skyblock\Islands;
 
 Class Main extends PluginBase implements Listener{
     public function onEnable(){
-        $this->getServer()->getPluginManager()->registerEvents($this, $this);
+        $eventListener = new EventListener($this);
         if(!is_dir($this->getDataFolder())){
             @mkdir($this->getDataFolder());
         }
