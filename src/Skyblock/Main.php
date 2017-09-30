@@ -27,7 +27,7 @@ Class Main extends PluginBase implements Listener{
         }
     }
     public function getIslands(){
-        return Islands($this);
+        return new Islands($this);
     }
     public function onCommand(CommandSender $sender, Command $command, $label, array $args){
         switch($command->getName()){
