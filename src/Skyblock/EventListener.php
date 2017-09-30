@@ -3,7 +3,7 @@ namespace SkyBlock;
 
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerChatEvent;
-class EventListener extends Listener {
+class EventListener implements Listener {
     private $main;
     public function __construct(Main $main){
         $this->main->getServer()->getPluginManager()->registerEvents($this, $this);
