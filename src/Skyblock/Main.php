@@ -17,7 +17,7 @@ Class Main extends PluginBase implements Listener{
     public function onEnable(){
         $eventListener = new EventListener($this);
         if(!is_dir($this->getDataFolder())){
-            @mkdir($this->getDataFolder());
+            mkdir($this->getDataFolder());
         }
         if(!file_exists($this->getDataFolder()."config.yml")){
             $config = new Config($this->getDataFolder()."config.yml", Config::YAML);
