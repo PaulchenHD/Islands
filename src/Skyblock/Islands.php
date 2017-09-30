@@ -10,7 +10,11 @@ use Skyblock\Main;
 class Islands
 {
     public function deleteIsland(Player $player){
-        $potentialIsland = "sb[".$player->getName()."]";
+        if($this->isIsland($player)) {
+            rmdir($potentialIsland);
+        }
+    }
+    public function isIsland(Player $player){
         if(is_dir("sb[".$player->getName()."]")) {
             rmdir($potentialIsland);
             return true;
