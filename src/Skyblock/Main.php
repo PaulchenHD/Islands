@@ -1,23 +1,24 @@
 <?php
-
 namespace Skyblock;
-
 use pocketmine\block\Block;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
+use pocketmine\event\Listener;
+use pocketmine\event\player\PlayerChatEvent;
 use pocketmine\level\Position;
 use pocketmine\math\Vector3;
 use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
 use pocketmine\utils\TextFormat as Color;
+
 use Skyblock\Islands;
 
 Class Main extends PluginBase implements Listener{
     public function onEnable(){
-        $eventListener = new EventListener($this);
+        $this->getServer()->getPluginManager()->registerEvents($this, $this);
         if(!is_dir($this->getDataFolder())){
-            mkdir($this->getDataFolder());
+            @mkdir($this->getDataFolder());
         }
         if(!file_exists($this->getDataFolder()."config.yml")){
             $config = new Config($this->getDataFolder()."config.yml", Config::YAML);
@@ -33,14 +34,18 @@ Class Main extends PluginBase implements Listener{
                 if($sender instanceof Player){
                     if(isset($args[0])){
                         if($args[0] == "create"){
-                            $this->getIslands()->setWorld($this->getDataFolder() . "world", $this->getServer()->getDataPath() . "worlds/sb[". $sender->getName()."]");
-                            $sender->sendMessage(Color::GREEN."");
+                            if(!is_dir($this->getServer()->getDataPath(). "worlds/sb[". $sender->getName()."]")){
+                                $this->getIslands()->setWorld($this->getDataFolder() . "world", $this->getServer()->getDataPath() . "worlds/sb[". $sender->getName()."]");
+                                $sender->sendMessage(Color::GREEN."");
+                            }
                         }
                         elseif($args[0] == "delete"){
-
+                            if(is_dir($this->getServer()->getDataPath(). "worlds/sb[". $sender->getName()."]")){
+                                
+                            }
                         }
                         elseif($args[0] == "spawn" || $args[0] == "tp" || $args[0] == "home"){ // TODO: move the world to the worlds, if the player want to leave, remove the world from worlds and set it into the data-folder
-                            if(file_exists($this->getServer()->getDataPath(). "worlds/sb[". $sender->getName()."]")){
+                            if(is_dir($this->getServer()->getDataPath(). "worlds/sb[". $sender->getName()."]")){
                                 $this->getServer()->loadLevel("sb[". $sender->getName()."]");
 
                                 $this->getIslands()->tpPlayerToHome($sender);
@@ -57,7 +62,6 @@ Class Main extends PluginBase implements Listener{
                             }
                         }
                         elseif($args[0] == "visit"){
-
                         }
                     }
                 }
