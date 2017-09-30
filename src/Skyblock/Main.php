@@ -13,6 +13,7 @@ use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
 use pocketmine\utils\TextFormat as Color;
+use Skyblock\Islands;
 
 Class Main extends PluginBase implements Listener{
     public function onEnable(){
@@ -25,25 +26,8 @@ Class Main extends PluginBase implements Listener{
             $config->save();
         }
     }
-    public function onChat(PlayerChatEvent $event){ // Only a example to set the world
-        if($event->getMessage() == "okay"){
-            $event->getPlayer()->getLevel()->setBlock(new Vector3($event->getPlayer()->x, $event->getPlayer()->y, $event->getPlayer()->z), new Block(1));
-        }
-    }
-    function setWorld($src,$dst) {
-        $dir = opendir($src);
-        @mkdir($dst);
-        while(false !== ( $file = readdir($dir)) ) {
-            if (( $file != '.' ) && ( $file != '..' )) {
-                if ( is_dir($src . '/' . $file) ) {
-                    $this->setWorld($src . '/' . $file,$dst . '/' . $file);
-                }
-                else {
-                    copy($src . '/' . $file,$dst . '/' . $file);
-                }
-            }
-        }
-        closedir($dir);
+    public function getIslands(){
+        return Islands($this);
     }
     public function onCommand(CommandSender $sender, Command $command, $label, array $args){
         switch($command->getName()){
@@ -51,7 +35,7 @@ Class Main extends PluginBase implements Listener{
                 if($sender instanceof Player){
                     if(isset($args[0])){
                         if($args[0] == "create"){
-                            $this->setWorld($this->getDataFolder() . "world", $this->getServer()->getDataPath() . "worlds/sb[". $sender->getName()."]");
+                            $this->getIslands()->setWorld($this->getDataFolder() . "world", $this->getServer()->getDataPath() . "worlds/sb[". $sender->getName()."]");
                             $sender->sendMessage(Color::GREEN."");
                         }
                         elseif($args[0] == "delete"){
