@@ -43,11 +43,7 @@ Class Main extends PluginBase implements Listener{
                             if(file_exists($this->getServer()->getDataPath(). "worlds/sb[". $sender->getName()."]")){
                                 $this->getServer()->loadLevel("sb[". $sender->getName()."]");
 
-                                $world = $this->getServer()->getLevelByName("sb[". $sender->getName(). "]");
-
-                                $loc = $world->getSpawnLocation();
-
-                                $sender->teleport(new Position($loc->x, $loc->y, $loc->z, $world));
+                                $this->getIslands()->tpPlayerToHome($sender);
                             }
                             else{
                                 $sender->sendMessage(Color::RED."Please make sure to create an island first.");
