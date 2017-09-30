@@ -11,11 +11,11 @@ class Islands
     }
     public function deleteIsland(Player $player){
         if($this->isIsland($player)) {
-            rmdir($this->getMain()->getServer()->getDataFolder(). "worlds/sb[". $player->getName()."]");
+            rmdir($this->getMain()->getServer()->getDataPath(). "worlds/sb[". $player->getName()."]");
         }
     }
     public function isIsland(Player $player){
-        $potentialIsland = $this->getMain()->getServer()->getDataFolder(). "worlds/sb[". $player->getName()."]";
+        $potentialIsland = $this->getMain()->getServer()->getDataPath(). "worlds/sb[". $player->getName()."]";
         if(is_dir($potentialIsland)) {
             rmdir($potentialIsland);
             return true;
