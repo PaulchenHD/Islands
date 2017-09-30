@@ -1,21 +1,21 @@
 <?php
-
 namespace Skyblock;
-
 use pocketmine\level\Position;
 use pocketmine\level\Level;
 use pocketmine\Player;
 use Skyblock\Main;
-
 class Islands
 {
+    public function getMain(){
+        return new Main();
+    }
     public function deleteIsland(Player $player){
         if($this->isIsland($player)) {
-            rmdir($this->getServer()->getDataPath(). "worlds/sb[". $player->getName()."]");
+            rmdir($this->getMain()->getServer()->getDataPath(). "worlds/sb[". $player->getName()."]");
         }
     }
     public function isIsland(Player $player){
-        $potentialIsland = $this->getServer()->getDataPath(). "worlds/sb[". $player->getName()."]";
+        $potentialIsland = $this->getMain()->getServer()->getDataPath(). "worlds/sb[". $player->getName()."]";
         if(is_dir($potentialIsland)) {
             rmdir($potentialIsland);
             return true;
@@ -39,7 +39,7 @@ class Islands
         closedir($dir);
     }
     public function tpPlayerToHome(Player $player){
-        $world = $this->getServer()->getLevelByName("sb[". $player->getName(). "]");
+        $world = $this->getMain()->getServer()->getLevelByName("sb[". $player->getName(). "]");
         $loc = $world->getSpawnLocation();
         $player->teleport(new Position($loc->x, $loc->y, $loc->z, $world));
     }
