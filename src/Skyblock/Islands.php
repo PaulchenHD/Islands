@@ -38,8 +38,7 @@ class Islands
         }
         closedir($dir);
     }
-    public function tpPlayerToHome(Player $player){
-        $world = $this->getMain()->getServer()->getLevelByName("sb[". $player->getName(). "]");
+    public function tpPlayerToHome(Player $player, Level $world){
         $loc = $world->getSpawnLocation();
         $player->teleport(new Position($loc->x, $loc->y, $loc->z, $world));
     }
