@@ -1,0 +1,13 @@
+## YAML Template.
+---
+name: Skyblock
+main: Skyblock\Main
+version: 1.0
+api: [1.13.0]
+load: STARTUP
+authors: [PaulchenHD, DecodedGaming]
+description: "Skyblock"
+
+commands:
+    island:
+        description: "Skyblock Commands"
