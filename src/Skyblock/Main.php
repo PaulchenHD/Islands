@@ -3,8 +3,6 @@ namespace Skyblock;
 use pocketmine\block\Block;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
-use pocketmine\event\Listener;
-use pocketmine\event\player\PlayerChatEvent;
 use pocketmine\level\Position;
 use pocketmine\math\Vector3;
 use pocketmine\Player;
@@ -14,7 +12,7 @@ use pocketmine\utils\TextFormat as Color;
 
 use Skyblock\Islands;
 
-Class Main extends PluginBase implements Listener{
+Class Main extends PluginBase {
     public function onEnable(){
         $eventListener = new EventListener($this);
         if(!is_dir($this->getDataFolder())){
