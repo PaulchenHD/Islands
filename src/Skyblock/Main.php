@@ -68,9 +68,9 @@ Class Main extends PluginBase implements Listener{
                                 if($player instanceof Player){
                                     $player->sendMessage(Color::GOLD. $sender->getName(). " want to visit your island. Type /island accept ". $sender->getName(). " into the chat if you want it, too.");
 
-                                    $this->vrequest[$player->getName()][$sender->getName()];
+                                    $this->vrequest[$player->getName()][$sender->getName()] = true;
 
-                                    $sender->sendMessage(Color::GREEN. "You sent a request to ". $sender->getName(). " to visit his/her island.");
+                                    $sender->sendMessage(Color::GREEN. "You sent a request to ". $player->getName(). " to visit his/her island.");
                                 }
                                 else{
                                     $sender->sendMessage(Color::RED."Please make sure that the player is online.");
