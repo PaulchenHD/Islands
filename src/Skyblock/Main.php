@@ -40,8 +40,6 @@ Class Main extends PluginBase implements Listener{
                         if($args[0] == "create"){
                             if(!is_dir($this->getServer()->getDataPath(). "worlds/sb[". $sender->getName()."]")){
                                 $this->getIslands()->setWorld($this->getDataFolder() . "world", $this->getServer()->getDataPath() . "worlds/sb[". $sender->getName()."]");
-                                $settings = new Config($this->getServer()->getDataPath() . "worlds/sb[". $sender->getName()."]/settings.json", Config::JSON);
-                                $settings->save();
                             }
                         }
                         elseif($args[0] == "delete"){
