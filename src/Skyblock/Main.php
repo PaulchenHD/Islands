@@ -40,7 +40,8 @@ Class Main extends PluginBase implements Listener{
                         if($args[0] == "create"){
                             if(!is_dir($this->getServer()->getDataPath(). "worlds/sb[". $sender->getName()."]")){
                                 $this->getIslands()->setWorld($this->getDataFolder() . "world", $this->getServer()->getDataPath() . "worlds/sb[". $sender->getName()."]");
-                                $sender->sendMessage(Color::GREEN."");
+                                $settings = new Config($this->getServer()->getDataPath() . "worlds/sb[". $sender->getName()."]/settings.json", Config::JSON);
+                                $settings->save();
                             }
                         }
                         elseif($args[0] == "delete"){
@@ -66,11 +67,16 @@ Class Main extends PluginBase implements Listener{
                             if(isset($args[1])){
                                 $player = $this->getServer()->getPlayer($args[1]);
                                 if($player instanceof Player){
-                                    $player->sendMessage(Color::GOLD. $sender->getName(). " want to visit your island. Type /island accept ". $sender->getName(). " into the chat if you want it, too.");
+                                    if(is_dir($this->getServer()->getDataPath(). "worlds/sb[". $player->getName()."]")){
+                                        $player->sendMessage(Color::GOLD. $sender->getName(). " want to visit your island. Type /island accept ". $sender->getName(). " into the chat if you want it, too.");
 
-                                    $this->vrequest[$player->getName()][$sender->getName()] = true;
+                                        $this->vrequest[$player->getName()][$sender->getName()] = true;
 
-                                    $sender->sendMessage(Color::GREEN. "You sent a request to ". $player->getName(). " to visit his/her island.");
+                                        $sender->sendMessage(Color::GREEN. "You sent a request to ". $player->getName(). " to visit his/her island.");
+                                    }
+                                    else{
+                                        $sender->sendMessage(Color::RED."The player doesn't have an island.");
+                                    }
                                 }
                                 else{
                                     $sender->sendMessage(Color::RED."Please make sure that the player is online.");
